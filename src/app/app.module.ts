@@ -8,16 +8,14 @@ import { ServicesModule } from './services/services.module';
 
 @NgModule({
   declarations: [
-    AppComponent    
+    AppComponent,      
   ],
   imports: [
     BrowserModule,
     HttpClientModule,    
     ReactiveFormsModule,
     ServicesModule,
-    
-
-  ],
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

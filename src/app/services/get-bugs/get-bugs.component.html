@@ -1,0 +1,21 @@
+<form [formGroup]="form">
+    <table id="bugs" style="background-color:SlateBlue;">Bug Reports</table>
+    <tbody>
+    <tr>
+        <th (click)="sortByTitle()">Title</th>
+        <th (click)="sortByPriority()">Priority</th>
+        <th (click)="sortByReporter()">Reporter</th>
+        <th (click)="sortByCreationDate()">Date Created</th>
+        <th (click)="sortByStatus()">Status</th>        
+    </tr>
+    </tbody>
+    <tbody>
+        <tr *ngFor="let bug of listdata">
+              <th scope="row">{{bug.title}}</th>
+              <td>{{bug.priority}}</td>
+              <td>{{bug.reporter}}</td>
+              <td>{{bug.createdAt}}</td>
+              <td>{{bug.status}}</td>
+        </tr>
+    </tbody>
+</form>

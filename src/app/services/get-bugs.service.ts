@@ -1,17 +1,23 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { compileDirectiveFromRender2 } from '@angular/compiler/src/render3/view/compiler';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GetBugsService {
+  private endpoint = 'https://bug-report-system-server.herokuapp.com/bugs?sort='
+                      
 
-  constructor(private  http: HttpClient) { 
+  constructor(private http: HttpClient) { 
+    
     
   }
 
-  getBugs(): Observable<any> {
-    return this.http.get<any>('https://bug-report-system-server.herokuapp.com/bugs');
+  getBugs(column: string, dir: string): Observable<any> {
+    const endpointf = this.endpoint + column + ',' + dir + '&page=0' + '&size=100';
+    console.log(endpointf);
+    return this.http.get(endpointf);
   }
 }
