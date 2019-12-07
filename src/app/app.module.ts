@@ -10,7 +10,8 @@ import { CreateBugsComponent } from './services/create-bugs/create-bugs.componen
 import { GetBugsComponent } from './services/get-bugs/get-bugs.component';
 
 const routes: Routes = [ { path: 'bugcreation', component: CreateBugsComponent },
-{path:'', component: GetBugsComponent}];
+{path:'', component: GetBugsComponent},
+];
 
 @NgModule({
   declarations: [
