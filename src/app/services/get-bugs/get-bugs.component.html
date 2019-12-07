@@ -1,5 +1,8 @@
 <form [formGroup]="form">
     <table id="bugs" style="background-color:SlateBlue;">Bug Reports</table>
+    <button type="button" [routerLink]="['bugcreation']">
+        Create Bug
+    </button> 
     <tbody>
     <tr>
         <th (click)="sortByTitle()">Title</th>
