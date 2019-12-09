@@ -2,14 +2,14 @@
     <table id="bugs" style="background-color:SlateBlue;">Bug Reports</table>
     <button type="button" [routerLink]="['bugcreation']">
         Create Bug
-    </button> 
+    </button>
     <tbody>
     <tr>
         <th (click)="sortByTitle()">Title</th>
         <th (click)="sortByPriority()">Priority</th>
         <th (click)="sortByReporter()">Reporter</th>
         <th (click)="sortByCreationDate()">Date Created</th>
-        <th (click)="sortByStatus()">Status</th>        
+        <th (click)="sortByStatus()">Status</th>
     </tr>
     </tbody>
     <tbody>
@@ -17,7 +17,7 @@
               <th scope="row">{{bug.title}}</th>
               <td>{{bug.priority}}</td>
               <td>{{bug.reporter}}</td>
-              <td>{{bug.createdAt}}</td>
+              <td>{{bug.createdAt | date: 'dd/MM/yyyy'}}</td>
               <td>{{bug.status}}</td>
         </tr>
     </tbody>
