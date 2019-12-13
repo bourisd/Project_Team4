@@ -44,10 +44,10 @@ export class GetBugsComponent implements OnInit {
 
     if (this.byTitle == true) {
       dir = "asc";
-      //this.columnSorting(false, false, false, false, false);
+      this.columnSorting(false, false, false, false, false);
     } else {
       dir = "desc";
-      //this.columnSorting(true, false, false, false, false);
+      this.columnSorting(true, false, false, false, false);
     }
 
     this.getBugs.getBugs("title", dir).subscribe(response => {
@@ -61,10 +61,10 @@ export class GetBugsComponent implements OnInit {
 
     if (this.byPriority == true) {
       dir = "asc";
-      //this.columnSorting(false, false, false, false, false);
+      this.columnSorting(false, false, false, false, false);
     } else {
       dir = "desc";
-      //this.columnSorting(false, true, false, false, false);
+      this.columnSorting(false, true, false, false, false);
     }
 
     this.getBugs.getBugs("priority", dir).subscribe(response => {
@@ -78,10 +78,10 @@ export class GetBugsComponent implements OnInit {
 
     if (this.byReporter == true) {
       dir = "asc";
-      //this.columnSorting(false, false, false, false, false);
+      this.columnSorting(false, false, false, false, false);
     } else {
       dir = "desc";
-      //this.columnSorting(false, false, true, false, false);
+      this.columnSorting(false, false, true, false, false);
     }
 
     this.getBugs.getBugs("reporter", dir).subscribe(response => {
@@ -95,10 +95,10 @@ export class GetBugsComponent implements OnInit {
 
     if (this.byCreationDate == true) {
       dir = "asc";
-      //this.columnSorting(false, false, false, false, false);
+      this.columnSorting(false, false, false, false, false);
     } else {
       dir = "desc";
-      //this.columnSorting(false, false, false, true, false);
+      this.columnSorting(false, false, false, true, false);
     }
 
     this.getBugs.getBugs("createdAt", dir).subscribe(response => {
@@ -112,10 +112,10 @@ export class GetBugsComponent implements OnInit {
 
     if (this.byStatus == true) {
       dir = "asc";
-      //this.columnSorting(false, false, false, false, false);
+      this.columnSorting(false, false, false, false, false);
     } else {
       dir = "desc";
-      //this.columnSorting(false, false, false, false, true);
+      this.columnSorting(false, false, false, false, true);
     }
 
     this.getBugs.getBugs("status", dir).subscribe(response => {
