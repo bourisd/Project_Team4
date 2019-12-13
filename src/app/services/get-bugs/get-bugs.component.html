@@ -1,24 +1,26 @@
 <form [formGroup]="form">
-    <table id="bugs" style="background-color:SlateBlue;">Bug Reports</table>
-    <button type="button" [routerLink]="['bugcreation']">
-        Create Bug
-    </button>
-    <tbody>
-    <tr>
-        <th (click)="sortByTitle()">Title</th>
-        <th (click)="sortByPriority()">Priority</th>
-        <th (click)="sortByReporter()">Reporter</th>
-        <th (click)="sortByCreationDate()">Date Created</th>
-        <th (click)="sortByStatus()">Status</th>
-    </tr>
-    </tbody>
-    <tbody>
-        <tr *ngFor="let bug of listdata">
+    <table style="margin-top: 10px; " id="bugs">
+        <tr style="background-color: slategrey;" >
+            <th (click)="sortByTitle(); ">Title</th>
+            <th (click)="sortByPriority();">Priority</th>
+            <th (click)="sortByReporter();">Reporter</th>
+            <th (click)="sortByCreationDate(); ">Date Created</th>
+            <th (click)="sortByStatus(); ">Status</th>
+            <th ></th>
+        </tr>
+        <tr *ngFor="let bug of listdata; let i = index">
               <th scope="row">{{bug.title}}</th>
               <td>{{bug.priority}}</td>
               <td>{{bug.reporter}}</td>
               <td>{{bug.createdAt | date: 'dd/MM/yyyy'}}</td>
               <td>{{bug.status}}</td>
+              <td (click)="editSelectedBug(i)">
+                <img src="../../../assets/img/icons8-edit-64.png" alt="pencil_edit" width="20px" >
+              </td>
         </tr>
-    </tbody>
+    </table>
+
 </form>
+<button type="button" [routerLink]="['bugcreation']">
+    Create Bug
+</button>
