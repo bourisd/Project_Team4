@@ -14,13 +14,21 @@ export class GetBugsService {
 
   getBugs(column: string, dir: string): Observable<any> {
     const endpointf =
-      this.endpoint + "?sort=" + column + "," + dir + "&page=0" + "&size=100";
+      this.endpoint + "?sort=" + column + "," + dir + "&page=0" + "&size=20";
     console.log(endpointf);
     return this.http.get(endpointf);
   }
 
+  getBug(id: string) {
+    return this.http.get(`${this.endpoint}/${id}`)
+  }
+
   createBugs(bug: BugList): Observable<any> {
     return this.http.post(this.endpoint, bug);
+  }
+
+  editBug(id: string, bug: BugList) {
+    return this.http.put(`${this.endpoint}/${id}`, bug)
   }
 
   setData(model: BugList): void {
@@ -29,5 +37,11 @@ export class GetBugsService {
 
   getData(): BugList {
     return this.editBugsData;
+  }
+
+  getPaging(i: number): Observable<any>{
+    const endpointf =
+      this.endpoint + "?sort=title,desc" + "&page=" + i + "&size=20";
+      return this.http.get(endpointf);
   }
 }

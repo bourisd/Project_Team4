@@ -11,6 +11,7 @@ import { GetBugsComponent } from "./services/get-bugs/get-bugs.component";
 
 const routes: Routes = [
   { path: "bugcreation", component: CreateBugsComponent },
+  { path: "bugcreation/:id", component: CreateBugsComponent },
   { path: "", component: GetBugsComponent }
 ];
 

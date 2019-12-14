@@ -17,6 +17,8 @@ export class GetBugsComponent implements OnInit {
   byReporter = false;
   byCreationDate = false;
   byStatus = false;
+  counter = 0;
+  pageNumber = 0;
 
   constructor(private getBugs: GetBugsService, private router: Router) {}
 
@@ -124,9 +126,22 @@ export class GetBugsComponent implements OnInit {
     });
   }
 
-  editSelectedBug(a: number) {
-    console.log("edit selected bug", this.listdata[a]);
-    this.getBugs.setData(this.listdata[a]);
-    this.router.navigate(["/bugcreation"]);
+  editSelectedBug(bugId: number) {
+    // console.log("edit selected bug", this.listdata[a]);
+    // this.getBugs.setData(this.listdata[a]);
+    this.router.navigate(["/bugcreation", bugId]);
+  }
+
+  getNextPage() {    
+      if(this.listdata.length == 20){        
+        this.pageNumber += 1
+        this.getBugs.getPaging(this.pageNumber).subscribe(response => {          
+          this.listdata = response;                      
+        });
+      }    
+  }
+
+  getPreviousPage(){
+    
   }
 }

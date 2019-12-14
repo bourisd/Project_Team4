@@ -1,24 +1,30 @@
 <form [formGroup]="form">
     <table style="margin-top: 10px; " id="bugs">
-        <tr style="background-color: slategrey;" >
+        <tr style="background-color: slategrey;">
             <th (click)="sortByTitle(); ">Title</th>
             <th (click)="sortByPriority();">Priority</th>
             <th (click)="sortByReporter();">Reporter</th>
             <th (click)="sortByCreationDate(); ">Date Created</th>
             <th (click)="sortByStatus(); ">Status</th>
-            <th ></th>
+            <th></th>
         </tr>
         <tr *ngFor="let bug of listdata; let i = index">
-              <th scope="row">{{bug.title}}</th>
-              <td>{{bug.priority}}</td>
-              <td>{{bug.reporter}}</td>
-              <td>{{bug.createdAt | date: 'dd/MM/yyyy'}}</td>
-              <td>{{bug.status}}</td>
-              <td (click)="editSelectedBug(i)">
-                <img src="../../../assets/img/icons8-edit-64.png" alt="pencil_edit" width="20px" >
-              </td>
+            <th scope="row">{{bug.title}}</th>
+            <td>{{bug.priority}}</td>
+            <td>{{bug.reporter}}</td>
+            <td>{{bug.createdAt | date: 'dd/MM/yyyy'}}</td>
+            <td>{{bug.status}}</td>
+            <td (click)="editSelectedBug(bug.id)">
+                <img src="../../../assets/img/icons8-edit-64.png" alt="pencil_edit" width="20px">
+            </td>
         </tr>
     </table>
+    <button type="button" (click)="getNextPage()">
+        Next
+    </button>
+    <button type="button" (click)="getPreviousPage()">
+        Previous
+    </button>
 
 </form>
 <button type="button" [routerLink]="['bugcreation']">
