@@ -5,6 +5,9 @@
       <input type="text" class="form-control" id="Title" aria-describedby="Title" name="title" placeholder="Enter Title"
         formControlName="title" />
       <small id="TitleError" class="form-text text-muted"></small>
+      <div *ngIf="form.get('title').errors?.required && form.get('title').dirty" class="text-danger">
+        Field is required
+      </div>
     </div>
   </div>
   <fieldset class="form-group">
@@ -19,6 +22,9 @@
 
       <input type="radio" formControlName="priority" value="3">
       <label for="Critical">Critical</label>
+      <div *ngIf="form.get('priority').invalid && form.get('priority').pristine" class="text-danger">
+        Field is required
+      </div>
     </div>
   </fieldset>
   <div class="form-group row">
@@ -26,6 +32,9 @@
     <div class="col-sm-10">
       <textarea class="span6" rows="3" name="description" placeholder="Enter Description"
         formControlName="description"></textarea>
+      <div *ngIf="form.get('description').invalid && form.get('description').dirty" class="text-danger">
+        Field is required
+      </div>
     </div>
   </div>
   <div class="form-group row">
@@ -36,6 +45,9 @@
         <option>PO</option>
         <option>DEV</option>
       </select>
+      <div *ngIf="form.get('reporter').invalid && form.get('reporter').pristine" class="text-danger">
+        Field is required
+      </div>
     </div>
   </div>
   <div class="form-group row">
@@ -46,23 +58,29 @@
         <option>Done</option>
         <option>Rejected</option>
       </select>
+      <div *ngIf="form.get('status').invalid && form.get('status').pristine" class="text-danger">
+        Field is required
+      </div>
     </div>
   </div>
   <div class="form-group row">
     <div *ngIf="bugId">
-      <button type="button" (click)="addComment()">Add Comment</button>      
+      <button type="button" (click)="addComment()" class="btn btn-primary">Add Comment</button>
       <div id="commentsBlock" formArrayName="comments">
         <div *ngFor="let item of commentsArray.controls; let i=index" [formGroupName]="i">
-          <textarea class="span6" rows="3" formControlName="description" placeholder="Comment Description"></textarea>
+          <textarea class="span6" rows="3" formControlName="description" placeholder="Comment Description"></textarea>          
           <textarea class="span6" rows="3" formControlName="reporter" placeholder="Reporter's Name"></textarea>
-        </div>
-      </div>      
+          <div *ngIf="!bugId">
+            <input type="text" formControlName="id">
+          </div>
+        </div>        
+      </div>
     </div>
   </div>
 
   <div class="form-group row">
     <div class="col-sm-4">
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Submit</button>
     </div>
     <div class="col-sm-5">
       <button type="button" [routerLink]="['']" class="btn btn-primary">
@@ -73,3 +91,4 @@
 </form>
 
 {{form.value | json}}
+{{form.valid | json}}

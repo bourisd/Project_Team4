@@ -14,12 +14,12 @@ export class GetBugsService {
 
   getBugs(column: string, dir: string): Observable<any> {
     const endpointf =
-      this.endpoint + "?sort=" + column + "," + dir + "&page=0" + "&size=20";
+      this.endpoint + "?sort=" + column + "," + dir + "&page=0" + "&size=14";
     console.log(endpointf);
     return this.http.get(endpointf);
   }
 
-  getBug(id: string) {
+  getBug(id: string): Observable<any> {
     return this.http.get(`${this.endpoint}/${id}`)
   }
 
@@ -41,7 +41,7 @@ export class GetBugsService {
 
   getPaging(i: number): Observable<any>{
     const endpointf =
-      this.endpoint + "?sort=title,desc" + "&page=" + i + "&size=20";
+      this.endpoint + "?sort=title,desc" + "&page=" + i + "&size=14";
       return this.http.get(endpointf);
   }
 }

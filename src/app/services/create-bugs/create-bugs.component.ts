@@ -1,48 +1,43 @@
 import { Component, OnInit } from "@angular/core";
-import { BugList } from "src/app/Bug.model";
 import { GetBugsService } from "../get-bugs.service";
 import { tap } from "rxjs/operators";
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormGroup, FormControl, FormArray, FormBuilder } from '@angular/forms';
+import { FormGroup, FormControl, FormArray, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: "bug-reporting-system-create-bugs",
   templateUrl: "./create-bugs.component.html",
   styleUrls: ["./create-bugs.component.scss"]
 })
-export class CreateBugsComponent implements OnInit {
-  // bug: BugList;
+export class CreateBugsComponent implements OnInit {  
   form: FormGroup
   commentForm: FormGroup
   bugId: string
 
   constructor(private createBugs: GetBugsService,
-    private router: Router, 
+    private router: Router,
     private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.bugId = this.activatedRoute.snapshot.params["id"]
-    this.getBug(this.bugId)    
+    this.getBug(this.bugId)
     this.initializeFormState();    
   }
 
   initializeFormState() {
     this.form = this.formBuilder.group(
       {
-        title: [],
-        priority: [],
-        reporter: [],
-        description: [],
-        status: [],
-        freeText: [],
-        nameOfReporter: [],
+        title: ['', Validators.required],
+        priority: [null, Validators.required],
+        reporter: ['', Validators.required],
+        description: ['', Validators.required],
+        status: ['', Validators.required],        
         comments: this.formBuilder.array([this.getcomments()])
       }
 
     )
-  }
-
+  }  
 
   submitbug() {
     if (this.form.invalid) {
@@ -65,22 +60,23 @@ export class CreateBugsComponent implements OnInit {
       return
     }
     this.createBugs.getBug(id).subscribe(data => {
-      this.form.patchValue(data)
+      this.form.patchValue(data);     
     })
-  }  
+  }
 
-  getcomments(){
+  getcomments() {
     return this.formBuilder.group({
       description: [],
-      reporter: []
+      reporter: [],
+      id: []
     });
   }
 
-  get commentsArray(){
+  get commentsArray() {
     return <FormArray>this.form.get('comments');
   }
 
-  addComment() { 
-    this.commentsArray.push(this.getcomments()); 
-  }  
+  addComment() {
+    this.commentsArray.push(this.getcomments());
+  }
 }

@@ -131,11 +131,11 @@ export class GetBugsComponent implements OnInit {
   }
 
   getNextPage() {        
-      if(this.listdata.length == 20){        
+      if(this.listdata.length == 14){        
         this.pageNumber += 1
         this.getBugs.getPaging(this.pageNumber).subscribe(response => {          
           this.listdata = response;
-          if(this.listdata.length < 20){
+          if(this.listdata.length < 14){
            this.form.get('next').disable();
           }                      
         });
