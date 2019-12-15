@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { GetBugsService } from "../get-bugs.service";
-import { FormGroup } from "@angular/forms";
+import { FormGroup, FormControl } from "@angular/forms";
 import { BugList } from "./../../Bug.model";
 import { Router } from "@angular/router";
 
@@ -126,22 +126,29 @@ export class GetBugsComponent implements OnInit {
     });
   }
 
-  editSelectedBug(bugId: number) {
-    // console.log("edit selected bug", this.listdata[a]);
-    // this.getBugs.setData(this.listdata[a]);
+  editSelectedBug(bugId: number) {    
     this.router.navigate(["/bugcreation", bugId]);
   }
 
-  getNextPage() {    
+  getNextPage() {        
       if(this.listdata.length == 20){        
         this.pageNumber += 1
         this.getBugs.getPaging(this.pageNumber).subscribe(response => {          
-          this.listdata = response;                      
+          this.listdata = response;
+          if(this.listdata.length < 20){
+           this.form.get('next').disable();
+          }                      
         });
       }    
   }
 
   getPreviousPage(){
-    
+    if(this.pageNumber > 0){
+      this.pageNumber -= 1;
+      this.getBugs.getPaging(this.pageNumber).subscribe(response =>
+        {
+          this.listdata = response;
+        })
   }
+}
 }
