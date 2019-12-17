@@ -130,6 +130,22 @@ export class GetBugsComponent implements OnInit {
     this.router.navigate(["/bugcreation", bugId]);
   }
 
+  deleteBug(bugId: string, index: number){
+     this.getBugs.deleteBug(bugId).subscribe(response =>
+      {
+        console.log(response);
+        if (response){
+          let afterDeleteArray = [...this.listdata];
+          afterDeleteArray.splice(index, 1);
+          this.listdata = [...afterDeleteArray];
+          this.getBugs.getBugsAfterDelete().subscribe(response =>
+            {
+              this.listdata = response;
+            });          
+        }
+      })
+  }
+
   getNextPage() {        
       if(this.listdata.length == 14){        
         this.pageNumber += 1

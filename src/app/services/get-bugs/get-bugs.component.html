@@ -7,6 +7,7 @@
             <th (click)="sortByCreationDate(); ">Date Created</th>
             <th (click)="sortByStatus(); ">Status</th>
             <th></th>
+            <th></th>
         </tr>
         <tr *ngFor="let bug of listdata; let i = index">
             <th scope="row">{{bug.title}}</th>
@@ -17,8 +18,12 @@
             <td (click)="editSelectedBug(bug.id)">
                 <img src="../../../assets/img/icons8-edit-64.png" alt="pencil_edit" width="20px">
             </td>
+            <button (click)="deleteBug(bug.id, i)">
+                Delete
+            </button>
         </tr>
     </table>
+     
     <button type="button" (click)="getNextPage()">
         Next
     </button>
@@ -26,7 +31,8 @@
         Previous
     </button>
 
+
 </form>
-<button type="button" [routerLink]="['bugcreation']">
+<button type="button"  class="btn btn-primary" [routerLink]="['bugcreation']">
     Create Bug
 </button>
