@@ -29,10 +29,10 @@
         </tr>
     </table>
      
-    <button type="button" (click)="getNextPage()">
+    <button type="button" (click)="getNextPage()" [disabled]="isButtonNextDisabled">
         Next
     </button>
-    <button type="button" (click)="getPreviousPage()">
+    <button type="button" (click)="getPreviousPage()" [disabled]="isButtonPreviousDisabled">
         Previous
     </button>
 

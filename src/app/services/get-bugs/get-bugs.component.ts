@@ -19,6 +19,8 @@ export class GetBugsComponent implements OnInit {
   byStatus = false;
   counter = 0;
   pageNumber = 0;
+  isButtonNextDisabled = false;
+  isButtonPreviousDisabled = false;
 
   constructor(private getBugs: GetBugsService, 
     private router: Router, 
@@ -30,7 +32,7 @@ export class GetBugsComponent implements OnInit {
         title: [''],
         priority: [''],
         reporter: [''],        
-        status: [''],       
+        status: ['']      
       }
     )
     this.sortByTitle();
@@ -159,10 +161,7 @@ export class GetBugsComponent implements OnInit {
       if(this.listdata.length == 14){        
         this.pageNumber += 1
         this.getBugs.getPaging(this.pageNumber).subscribe(response => {          
-          this.listdata = response;
-          if(this.listdata.length < 14){
-           this.form.get('next').disable();
-          }                      
+          this.listdata = response;          
         });
       }    
   }
@@ -189,5 +188,8 @@ searchBug(){
     {
       this.listdata = response;
     })
+
+    this.isButtonNextDisabled = true;
+    this.isButtonPreviousDisabled = true;
 }
 }
