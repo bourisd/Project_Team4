@@ -55,4 +55,10 @@ export class GetBugsService {
   deleteBug(id: string) {
     return this.http.delete(`${this.endpoint}/${id}`)
   }
+
+  searchBug(title: string, priority:string, reporter: string, status: string): Observable<any>{
+    const endpointf = 
+    this.endpoint + "?sort=title,desc" + "&page=0"  + "&size=100" + "&title=" + title + "&priority=" + priority + "&reporter=" + reporter + "&status=" + status;
+    return this.http.get(endpointf);
+  }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { GetBugsService } from "../get-bugs.service";
-import { FormGroup, FormControl } from "@angular/forms";
+import { FormGroup, FormControl, FormBuilder } from "@angular/forms";
 import { BugList } from "./../../Bug.model";
 import { Router } from "@angular/router";
 
@@ -20,10 +20,19 @@ export class GetBugsComponent implements OnInit {
   counter = 0;
   pageNumber = 0;
 
-  constructor(private getBugs: GetBugsService, private router: Router) {}
+  constructor(private getBugs: GetBugsService, 
+    private router: Router, 
+    private formBuilder: FormBuilder) {}
 
   ngOnInit() {
-    this.form = new FormGroup({});
+    this.form = this.formBuilder.group(
+      {
+        title: [''],
+        priority: [''],
+        reporter: [''],        
+        status: [''],       
+      }
+    )
     this.sortByTitle();
   }
 
@@ -165,6 +174,20 @@ export class GetBugsComponent implements OnInit {
         {
           this.listdata = response;
         })
-  }
+  }  
+}
+
+searchBug(){
+  console.log()
+  const title = this.form.get('title').value;
+  const priority = this.form.get('priority').value;
+  const reporter = this.form.get('reporter').value;
+  const status = this.form.get('status').value;
+  console.log(title);
+
+  this.getBugs.searchBug(title,priority,reporter,status).subscribe(response =>
+    {
+      this.listdata = response;
+    })
 }
 }

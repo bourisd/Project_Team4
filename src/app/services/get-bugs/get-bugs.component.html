@@ -1,4 +1,9 @@
 <form [formGroup]="form">
+    <textarea class="span6" formControlName="title" placeholder="Title"></textarea>  
+    <textarea class="span6" formControlName="priority" placeholder="Priority"></textarea>
+    <textarea class="span6" formControlName="reporter" placeholder="Reporter"></textarea> 
+    <textarea class="span6" formControlName="status" placeholder="Status"></textarea> 
+    <button type="button" class="btn btn-primary" (click)="searchBug()">Search</button>
     <table style="margin-top: 10px; " id="bugs">
         <tr style="background-color: slategrey;">
             <th (click)="sortByTitle(); ">Title</th>
