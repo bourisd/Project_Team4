@@ -191,5 +191,9 @@ searchBug(){
 
     this.isButtonNextDisabled = true;
     this.isButtonPreviousDisabled = true;
+    this.form.get('title').setValue('');
+    this.form.get('priority').setValue('');
+    this.form.get('reporter').setValue('');
+    this.form.get('status').setValue('');    
 }
 }
