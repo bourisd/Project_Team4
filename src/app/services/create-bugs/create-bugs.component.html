@@ -1,6 +1,11 @@
+<div class= "pt-4">
 <form [formGroup]="form" class="container" (submit)="submitbug()">
+
+
   <div class="form-group row">
+
     <label for="Title" class="col-sm-2 col-form-label">Title</label>
+
     <div class="col-sm-6">
       <input type="text" class="form-control" id="Title" aria-describedby="Title" name="title" placeholder="Enter Title"
         formControlName="title" />
@@ -14,14 +19,18 @@
     <div class="row">
       <legend class="col-form-label col-sm-2 pt-0">Priority</legend>
 
-      <input type="radio" formControlName="priority" value="1">
-      <label for="Minor">Minor</label>
-
-      <input type="radio" formControlName="priority" value="2">
-      <label for="Major">Major</label>
-
-      <input type="radio" formControlName="priority" value="3">
-      <label for="Critical">Critical</label>
+      <div class="custom-control custom-radio custom-control-inline">
+          <input type="radio" id="customRadioInline1" name="priority" formControlName="priority" value="1" class="custom-control-input">
+          <label class="custom-control-label" for="customRadioInline1">Minor</label>
+        </div>
+        <div class="custom-control custom-radio custom-control-inline">
+          <input type="radio" id="customRadioInline2" name="priority" formControlName="priority" value="2"  class="custom-control-input">
+          <label class="custom-control-label" for="customRadioInline2">Major</label>
+        </div>
+        <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="customRadioInline3" name="priority" formControlName="priority" value="3" class="custom-control-input">
+            <label class="custom-control-label" for="customRadioInline3">Critical</label>
+      </div>
       <div *ngIf="form.get('priority').invalid && form.get('priority').pristine" class="text-danger">
         Field is required
       </div>
@@ -68,27 +77,32 @@
       <button type="button" (click)="addComment()" class="btn btn-primary">Add Comment</button>
       <div id="commentsBlock" formArrayName="comments">
         <div *ngFor="let item of commentsArray.controls; let i=index" [formGroupName]="i">
-          <textarea class="span6" rows="3" formControlName="description" placeholder="Comment Description"></textarea>          
+          <textarea class="span6" rows="3" formControlName="description" placeholder="Comment Description"></textarea>
           <textarea class="span6" rows="3" formControlName="reporter" placeholder="Reporter's Name"></textarea>
           <div *ngIf="!bugId">
             <input type="text" formControlName="id">
           </div>
-        </div>        
+        </div>
       </div>
     </div>
   </div>
 
   <div class="form-group row">
+      <div class="col-sm-5">
+          <button type="button" [routerLink]="['']" class="btn btn-secondary">
+            Back
+          </button>
+        </div>
     <div class="col-sm-4">
-      <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Submit</button>
-    </div>
-    <div class="col-sm-5">
-      <button type="button" [routerLink]="['']" class="btn btn-primary">
-        Back
-      </button>
+      <button type="submit" class="btn btn-success" [disabled]="form.invalid">Submit</button>
     </div>
   </div>
 </form>
+</div>
+
+
 
 {{form.value | json}}
 {{form.valid | json}}
+
+

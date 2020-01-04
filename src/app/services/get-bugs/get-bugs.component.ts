@@ -21,9 +21,9 @@ export class GetBugsComponent implements OnInit {
   pageNumber = 0;
   isButtonNextDisabled = false;
   isButtonPreviousDisabled = false;
-
-  constructor(private getBugs: GetBugsService, 
-    private router: Router, 
+  public fireworks = false;
+  constructor(private getBugs: GetBugsService,
+    private router: Router,
     private formBuilder: FormBuilder) {}
 
   ngOnInit() {
@@ -31,8 +31,8 @@ export class GetBugsComponent implements OnInit {
       {
         title: [''],
         priority: [''],
-        reporter: [''],        
-        status: ['']      
+        reporter: [''],
+        status: ['']
       }
     )
     this.sortByTitle();
@@ -137,33 +137,36 @@ export class GetBugsComponent implements OnInit {
     });
   }
 
-  editSelectedBug(bugId: number) {    
+  editSelectedBug(bugId: number) {
     this.router.navigate(["/bugcreation", bugId]);
   }
 
   deleteBug(bugId: string, index: number){
+
      this.getBugs.deleteBug(bugId).subscribe(response =>
       {
         console.log(response);
+        this.fireworks = true;
+        setTimeout(()=>{ this.fireworks = false; }, 5000);
         if (response){
           let afterDeleteArray = [...this.listdata];
           afterDeleteArray.splice(index, 1);
           this.listdata = [...afterDeleteArray];
-          this.getBugs.getBugsAfterDelete().subscribe(response =>
-            {
-              this.listdata = response;
-            });          
+           this.getBugs.getBugsAfterDelete().subscribe(response =>
+              {
+               this.listdata = response;
+            });
         }
       })
   }
 
-  getNextPage() {        
-      if(this.listdata.length == 14){        
+  getNextPage() {
+      if(this.listdata.length == 14){
         this.pageNumber += 1
-        this.getBugs.getPaging(this.pageNumber).subscribe(response => {          
-          this.listdata = response;          
+        this.getBugs.getPaging(this.pageNumber).subscribe(response => {
+          this.listdata = response;
         });
-      }    
+      }
   }
 
   getPreviousPage(){
@@ -173,7 +176,7 @@ export class GetBugsComponent implements OnInit {
         {
           this.listdata = response;
         })
-  }  
+  }
 }
 
 searchBug(){
@@ -194,6 +197,6 @@ searchBug(){
     this.form.get('title').setValue('');
     this.form.get('priority').setValue('');
     this.form.get('reporter').setValue('');
-    this.form.get('status').setValue('');    
+    this.form.get('status').setValue('');
 }
 }

@@ -1,17 +1,41 @@
-<form [formGroup]="form">
-    <textarea class="span6" formControlName="title" placeholder="Title"></textarea>  
-    <textarea class="span6" formControlName="priority" placeholder="Priority"></textarea>
-    <textarea class="span6" formControlName="reporter" placeholder="Reporter"></textarea> 
-    <textarea class="span6" formControlName="status" placeholder="Status"></textarea> 
-    <button type="button" class="btn btn-primary" (click)="searchBug()">Search</button>
+<div class= "text-center pt-4">
+
+
+  <form [formGroup]="form">
+      <div class="form-group row">
+          <div class="col-sm-2">
+              <input type="text" class="form-control" id="Title" name="title" placeholder="Search Title" formControlName="title" />
+          </div>
+          <div class="col-sm-2">
+              <input type="text" class="form-control" id="Priority" name="priority" placeholder="Search Priority" formControlName="priority" />
+          </div>
+          <div class="col-sm-2">
+              <input type="text" class="form-control" id="Reporter" name="reporter" placeholder="Search Reporter" formControlName="reporter" />
+          </div>
+          <div class="col-sm-2">
+              <input type="text" class="form-control" id="Status" name="status" placeholder="Search Status" formControlName="status" />
+          </div>
+          <div class="col-sm-2">
+
+              <button  type="button" class="btn btn-primary" (click)="searchBug()">
+                  <fa name="search"></fa>
+                  &nbsp;Search</button>
+          </div>
+          <div class="col-sm-2">
+
+              <button type="button"  class="btn btn-success" [routerLink]="['bugcreation']">
+                  <fa name="plus"></fa>
+                  &nbsp;Insert
+              </button>
+          </div>
+      </div>
     <table style="margin-top: 10px; " id="bugs">
         <tr style="background-color: slategrey;">
-            <th (click)="sortByTitle(); ">Title</th>
-            <th (click)="sortByPriority();">Priority</th>
-            <th (click)="sortByReporter();">Reporter</th>
-            <th (click)="sortByCreationDate(); ">Date Created</th>
-            <th (click)="sortByStatus(); ">Status</th>
-            <th></th>
+            <th (click)="sortByTitle(); " style="color: white;">Title </th>
+            <th (click)="sortByPriority();" style="color: white;">Priority </th>
+            <th (click)="sortByReporter();"style="color: white;">Reporter </th>
+            <th (click)="sortByCreationDate(); "style="color: white;">Date Created </th>
+            <th (click)="sortByStatus(); "style="color: white;">Status </th>
             <th></th>
         </tr>
         <tr *ngFor="let bug of listdata; let i = index">
@@ -20,24 +44,35 @@
             <td>{{bug.reporter}}</td>
             <td>{{bug.createdAt | date: 'dd/MM/yyyy'}}</td>
             <td>{{bug.status}}</td>
-            <td (click)="editSelectedBug(bug.id)">
-                <img src="../../../assets/img/icons8-edit-64.png" alt="pencil_edit" width="20px">
+            <td class ="text-center">
+                <button class="btn btn-secondary mr-2" (click)="editSelectedBug(bug.id)">
+                    <fa name="edit"></fa>
+                </button>
+                <button class="btn btn-danger" (click)="deleteBug(bug.id, i)">
+                    <fa name="trash-o"></fa>
+                </button>
             </td>
-            <button (click)="deleteBug(bug.id, i)">
-                Delete
-            </button>
         </tr>
     </table>
-     
-    <button type="button" (click)="getNextPage()" [disabled]="isButtonNextDisabled">
-        Next
-    </button>
-    <button type="button" (click)="getPreviousPage()" [disabled]="isButtonPreviousDisabled">
-        Previous
-    </button>
+  <div class ="pt-2">
+      <button class="btn btn-secondary mr-2" type="button" (click)="getPreviousPage()" [disabled]="isButtonPreviousDisabled">
+          &laquo; Previous
+        </button>
+        <button class="btn btn-secondary mr-2" type="button" (click)="getNextPage()" [disabled]="isButtonNextDisabled">
+           Next &raquo;
+        </button>
+  </div>
+
+  </form>
+</div>
+
+<div *ngIf="fireworks" class="pyro">
+    <div class="before"></div>
+    <div class="after"></div>
+</div>
 
 
-</form>
-<button type="button"  class="btn btn-primary" [routerLink]="['bugcreation']">
-    Create Bug
-</button>
+
+
+
+

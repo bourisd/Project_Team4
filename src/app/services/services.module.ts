@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CreateBugsComponent } from './create-bugs/create-bugs.component';
 import { RouterModule } from '@angular/router';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 
 
@@ -16,7 +17,9 @@ import { RouterModule } from '@angular/router';
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
-    RouterModule.forChild([])
+    RouterModule.forChild([]),
+    AngularFontAwesomeModule
+
 
   ],
 

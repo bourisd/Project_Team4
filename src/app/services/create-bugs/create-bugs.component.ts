@@ -8,7 +8,7 @@ import { FormGroup, FormControl, FormArray, FormBuilder, Validators } from '@ang
   templateUrl: "./create-bugs.component.html",
   styleUrls: ["./create-bugs.component.scss"]
 })
-export class CreateBugsComponent implements OnInit {  
+export class CreateBugsComponent implements OnInit {
   form: FormGroup
   commentForm: FormGroup
   bugId: string
@@ -18,7 +18,7 @@ export class CreateBugsComponent implements OnInit {
     private formBuilder: FormBuilder) { }
   ngOnInit() {
     this.bugId = this.activatedRoute.snapshot.params["id"]
-    this.initializeFormState();    
+    this.initializeFormState();
   }
   initializeFormState() {
     this.form = this.formBuilder.group(
@@ -27,15 +27,15 @@ export class CreateBugsComponent implements OnInit {
         priority: [null, Validators.required],
         reporter: ['', Validators.required],
         description: ['', Validators.required],
-        status: ['', Validators.required],        
+        status: ['', Validators.required],
         comments: this.formBuilder.array([this.getcomments()])
       }
     )
     this.getBug(this.bugId)
-  }  
+  }
   submitbug() {
     if (this.form.invalid) {
-      return
+      return;
     }
     const actionToInvoke = this.bugId
       ? this.createBugs.editBug(this.bugId, this.form.value)
@@ -46,14 +46,14 @@ export class CreateBugsComponent implements OnInit {
   }
   private getBug(id) {
     if (!id) {
-      return
+      return;
     }
     this.createBugs.getBug(id).subscribe(data => {
       this.commentsArray.removeAt(0); // remove the first bug that have been created in initializeFormState method
       data.comments.forEach(comment => {
         this.addComment(comment)
       })
-      this.form.patchValue(data);     
+      this.form.patchValue(data);
     })
   }
   getcomments(comment = null) {
