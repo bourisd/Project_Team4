@@ -1,78 +1,70 @@
 <div class= "text-center pt-4">
 
-
-  <form [formGroup]="form">
-      <div class="form-group row">
-          <div class="col-sm-2">
-              <input type="text" class="form-control" id="Title" name="title" placeholder="Search Title" formControlName="title" />
-          </div>
-          <div class="col-sm-2">
-              <input type="text" class="form-control" id="Priority" name="priority" placeholder="Search Priority" formControlName="priority" />
-          </div>
-          <div class="col-sm-2">
-              <input type="text" class="form-control" id="Reporter" name="reporter" placeholder="Search Reporter" formControlName="reporter" />
-          </div>
-          <div class="col-sm-2">
-              <input type="text" class="form-control" id="Status" name="status" placeholder="Search Status" formControlName="status" />
-          </div>
-          <div class="col-sm-2">
-
-              <button  type="button" class="btn btn-primary" (click)="searchBug()">
-                  <fa name="search"></fa>
-                  &nbsp;Search</button>
-          </div>
-          <div class="col-sm-2">
-
-              <button type="button"  class="btn btn-success" [routerLink]="['bugcreation']">
-                  <fa name="plus"></fa>
-                  &nbsp;Insert
-              </button>
-          </div>
-      </div>
-    <table style="margin-top: 10px; " id="bugs">
-        <tr style="background-color: slategrey;">
-            <th (click)="sortByTitle(); " style="color: white;">Title </th>
-            <th (click)="sortByPriority();" style="color: white;">Priority </th>
-            <th (click)="sortByReporter();"style="color: white;">Reporter </th>
-            <th (click)="sortByCreationDate(); "style="color: white;">Date Created </th>
-            <th (click)="sortByStatus(); "style="color: white;">Status </th>
-            <th></th>
-        </tr>
-        <tr *ngFor="let bug of listdata; let i = index">
-            <th scope="row">{{bug.title}}</th>
-            <td>{{bug.priority}}</td>
-            <td>{{bug.reporter}}</td>
-            <td>{{bug.createdAt | date: 'dd/MM/yyyy'}}</td>
-            <td>{{bug.status}}</td>
-            <td class ="text-center">
-                <button class="btn btn-secondary mr-2" (click)="editSelectedBug(bug.id)">
-                    <fa name="edit"></fa>
-                </button>
-                <button class="btn btn-danger" (click)="deleteBug(bug.id, i)">
-                    <fa name="trash-o"></fa>
-                </button>
-            </td>
-        </tr>
-    </table>
-  <div class ="pt-2">
-      <button class="btn btn-secondary mr-2" type="button" (click)="getPreviousPage()" [disabled]="isButtonPreviousDisabled">
-          &laquo; Previous
-        </button>
-        <button class="btn btn-secondary mr-2" type="button" (click)="getNextPage()" [disabled]="isButtonNextDisabled">
-           Next &raquo;
-        </button>
+    <form [formGroup]="form">
+        <div class="form-group row">
+  
+  
+          <div class="search-box">
+            <input type="text" formControlName="title" class="search-field title" placeholder="Title">
+            <input type="text" formControlName="priority" class="search-field priority" placeholder="Priority">
+            <input type="text" formControlName="reporter" class="search-field reporter" placeholder="Reporter">
+            <input type="text" formControlName="status" class="search-field status" placeholder="Status">
+  
+            <button type="button" class="search-btn" (click)="searchBug()">
+                Search
+            </button>
+  
+            <button type="button"  class="btn btn-success" [routerLink]="['bugcreation']">
+              <fa name="plus"></fa>
+              &nbsp;Insert
+          </button>
+        </div>
+        </div>
+      <table style="margin-top: 10px; " id="bugs">
+          <tr style="background-color: slategrey;">
+              <th (click)="sortByTitle(); " style="color: white;">Title </th>
+              <th (click)="sortByPriority();" style="color: white;">Priority </th>
+              <th (click)="sortByReporter();"style="color: white;">Reporter </th>
+              <th (click)="sortByCreationDate(); "style="color: white;">Date Created </th>
+              <th (click)="sortByStatus(); "style="color: white;">Status </th>
+              <th></th>
+          </tr>
+          <tr *ngFor="let bug of listdata; let i = index">
+              <th scope="row">{{bug.title}}</th>
+              <td>{{bug.priority}}</td>
+              <td>{{bug.reporter}}</td>
+              <td>{{bug.createdAt | date: 'dd/MM/yyyy'}}</td>
+              <td>{{bug.status}}</td>
+              <td class ="text-center">
+                  <button class="btn btn-secondary mr-2" (click)="editSelectedBug(bug.id)">
+                      <fa name="edit"></fa>
+                  </button>
+                  <button class="btn btn-danger" (click)="deleteBug(bug.id, i)">
+                      <fa name="trash-o"></fa>
+                  </button>
+              </td>
+          </tr>
+      </table>
+    <div class ="pt-2">
+        <button class="btn btn-secondary mr-2" type="button" (click)="getPreviousPage()" [disabled]="isButtonPreviousDisabled">
+            &laquo; Previous
+          </button>
+          <button class="btn btn-secondary mr-2" type="button" (click)="getNextPage()" [disabled]="isButtonNextDisabled">
+             Next &raquo;
+          </button>
+    </div>
+  
+    </form>
   </div>
-
-  </form>
-</div>
-
-<div *ngIf="fireworks" class="pyro">
-    <div class="before"></div>
-    <div class="after"></div>
-</div>
-
-
-
-
-
-
+  
+  <div *ngIf="fireworks" class="pyro">
+      <div class="before"></div>
+      <div class="after"></div>
+  </div>
+  
+  
+  
+  
+  
+  
+  

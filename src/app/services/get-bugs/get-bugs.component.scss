@@ -173,3 +173,48 @@ body {
   }
 }
 
+.search-field
+{
+  height: 38px;
+  padding: 10px;
+  border-radius: 25px;
+  outline: none;
+}
+
+.title{
+  height: 38px;
+  width: 200px;
+}
+.priority{
+  height: 38px;
+  width: 80px;
+}
+.reporter{
+  height: 38px;
+  width: 100px;
+}
+.status{
+  height: 38px;
+  width: 140px;
+}
+.search-btn{
+  height: 38px;
+  width: 100px;
+  background: #ffeb3b;
+  border: none;
+  color: #000;
+  border-radius: 25px;
+  margin-right: 80px;
+
+}
+
+search:hover{
+  background: #ffc107;
+  cursor: pointer;
+}
+.search-box{
+  //background: rgba(0,0,0,0.5);
+  padding: 10px;
+  width: 10000px;
+}
+

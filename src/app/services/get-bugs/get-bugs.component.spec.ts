@@ -1,6 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { GetBugsComponent } from './get-bugs.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
+import { AngularFontAwesomeComponent } from 'angular-font-awesome';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('GetBugsComponent', () => {
   let component: GetBugsComponent;
@@ -8,7 +12,8 @@ describe('GetBugsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ GetBugsComponent ]
+      declarations: [ GetBugsComponent, AngularFontAwesomeComponent ],
+      imports: [ReactiveFormsModule, RouterTestingModule, HttpClientModule],
     })
     .compileComponents();
   }));

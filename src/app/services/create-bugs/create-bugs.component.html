@@ -1,108 +1,102 @@
 <div class= "pt-4">
-<form [formGroup]="form" class="container" (submit)="submitbug()">
-
-
-  <div class="form-group row">
-
-    <label for="Title" class="col-sm-2 col-form-label">Title</label>
-
-    <div class="col-sm-6">
-      <input type="text" class="form-control" id="Title" aria-describedby="Title" name="title" placeholder="Enter Title"
-        formControlName="title" />
-      <small id="TitleError" class="form-text text-muted"></small>
-      <div *ngIf="form.get('title').errors?.required && form.get('title').dirty" class="text-danger">
-        Field is required
-      </div>
-    </div>
-  </div>
-  <fieldset class="form-group">
-    <div class="row">
-      <legend class="col-form-label col-sm-2 pt-0">Priority</legend>
-
-      <div class="custom-control custom-radio custom-control-inline">
-          <input type="radio" id="customRadioInline1" name="priority" formControlName="priority" value="1" class="custom-control-input">
-          <label class="custom-control-label" for="customRadioInline1">Minor</label>
+  <form [formGroup]="form" class="container" (submit)="submitbug()">
+  
+  
+    <div class="form-group row">
+  
+      <label for="Title" class="col-sm-2 col-form-label">Title</label>
+  
+      <div class="col-sm-6">
+        <input type="text" class="form-control" id="Title" aria-describedby="Title" name="title" placeholder="Enter Title"
+          formControlName="title" />
+        <small id="TitleError" class="form-text text-muted"></small>
+        <div *ngIf="form.get('title').errors?.required && form.get('title').dirty" class="text-danger">
+          Field is required
         </div>
+      </div>
+    </div>
+    <fieldset class="form-group">
+      <div class="row">
+        <legend class="col-form-label col-sm-2 pt-0">Priority</legend>
+  
         <div class="custom-control custom-radio custom-control-inline">
-          <input type="radio" id="customRadioInline2" name="priority" formControlName="priority" value="2"  class="custom-control-input">
-          <label class="custom-control-label" for="customRadioInline2">Major</label>
+            <input type="radio" id="customRadioInline1" name="priority" formControlName="priority" value="1" class="custom-control-input">
+            <label class="custom-control-label" for="customRadioInline1">Minor</label>
+          </div>
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="customRadioInline2" name="priority" formControlName="priority" value="2"  class="custom-control-input">
+            <label class="custom-control-label" for="customRadioInline2">Major</label>
+          </div>
+          <div class="custom-control custom-radio custom-control-inline">
+              <input type="radio" id="customRadioInline3" name="priority" formControlName="priority" value="3" class="custom-control-input">
+              <label class="custom-control-label" for="customRadioInline3">Critical</label>
         </div>
-        <div class="custom-control custom-radio custom-control-inline">
-            <input type="radio" id="customRadioInline3" name="priority" formControlName="priority" value="3" class="custom-control-input">
-            <label class="custom-control-label" for="customRadioInline3">Critical</label>
+        <div *ngIf="form.get('priority').invalid && form.get('priority').pristine" class="text-danger">
+          Field is required
+        </div>
       </div>
-      <div *ngIf="form.get('priority').invalid && form.get('priority').pristine" class="text-danger">
-        Field is required
-      </div>
-    </div>
-  </fieldset>
-  <div class="form-group row">
-    <label for="Description" class="col-sm-2 col-form-label">Description</label>
-    <div class="col-sm-10">
-      <textarea class="span6" rows="3" name="description" placeholder="Enter Description"
-        formControlName="description"></textarea>
-      <div *ngIf="form.get('description').invalid && form.get('description').dirty" class="text-danger">
-        Field is required
+    </fieldset>
+    <div class="form-group row">
+      <label for="Description" class="col-sm-2 col-form-label">Description</label>
+      <div class="col-sm-10">
+        <textarea class="span6" rows="3" name="description" placeholder="Enter Description"
+          formControlName="description"></textarea>
+        <div *ngIf="form.get('description').invalid && form.get('description').dirty" class="text-danger">
+          Field is required
+        </div>
       </div>
     </div>
-  </div>
-  <div class="form-group row">
-    <div class="col-sm-2">Reporter</div>
-    <div class="col-sm-4">
-      <select id="inputState" class="form-control" name="reporter" formControlName="reporter">
-        <option selected>QA</option>
-        <option>PO</option>
-        <option>DEV</option>
-      </select>
-      <div *ngIf="form.get('reporter').invalid && form.get('reporter').pristine" class="text-danger">
-        Field is required
+    <div class="form-group row">
+      <div class="col-sm-2">Reporter</div>
+      <div class="col-sm-4">
+        <select id="inputState" class="form-control" name="reporter" formControlName="reporter">
+          <option selected>QA</option>
+          <option>PO</option>
+          <option>DEV</option>
+        </select>
+        <div *ngIf="form.get('reporter').invalid && form.get('reporter').pristine" class="text-danger">
+          Field is required
+        </div>
       </div>
     </div>
-  </div>
-  <div class="form-group row">
-    <div class="col-sm-2">Status</div>
-    <div class="col-sm-4">
-      <select id="status" class="form-control" name="status" formControlName="status">
-        <option selected>Ready for test </option>
-        <option>Done</option>
-        <option>Rejected</option>
-      </select>
-      <div *ngIf="form.get('status').invalid && form.get('status').pristine" class="text-danger">
-        Field is required
+    <div class="form-group row">
+      <div class="col-sm-2">Status</div>
+      <div class="col-sm-4">
+        <select id="status" class="form-control" name="status" formControlName="status">
+          <option selected>Ready for test </option>
+          <option>Done</option>
+          <option>Rejected</option>
+        </select>
+        <div *ngIf="form.get('status').invalid && form.get('status').pristine" class="text-danger">
+          Field is required
+        </div>
       </div>
     </div>
-  </div>
-  <div class="form-group row">
-    <div *ngIf="bugId">
-      <button type="button" (click)="addComment()" class="btn btn-primary">Add Comment</button>
-      <div id="commentsBlock" formArrayName="comments">
-        <div *ngFor="let item of commentsArray.controls; let i=index" [formGroupName]="i">
-          <textarea class="span6" rows="3" formControlName="description" placeholder="Comment Description"></textarea>
-          <textarea class="span6" rows="3" formControlName="reporter" placeholder="Reporter's Name"></textarea>
-          <div *ngIf="!bugId">
-            <input type="text" formControlName="id">
+    <div class="form-group row">
+      <div *ngIf="bugId">
+        <button type="button" (click)="addComment()" class="btn btn-primary">Add Comment</button>
+        <div id="commentsBlock" formArrayName="comments">
+          <div *ngFor="let item of commentsArray.controls; let i=index" [formGroupName]="i">
+            <textarea class="span6" rows="3" formControlName="description" placeholder="Comment Description"></textarea>
+            <textarea class="span6" rows="3" formControlName="reporter" placeholder="Reporter's Name"></textarea>
+            <div *ngIf="!bugId">
+              <input type="text" formControlName="id">
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-
-  <div class="form-group row">
-      <div class="col-sm-5">
-          <button type="button" [routerLink]="['']" class="btn btn-secondary">
-            Back
-          </button>
-        </div>
-    <div class="col-sm-4">
-      <button type="submit" class="btn btn-success" [disabled]="form.invalid">Submit</button>
+  
+    <div class="form-group row">
+        <div class="col-sm-5">
+            <button type="button" [routerLink]="['']" class="btn btn-secondary">
+              Back
+            </button>
+          </div>
+      <div class="col-sm-4">
+        <button type="submit" class="btn btn-success" [disabled]="form.invalid">Submit</button>
+      </div>
     </div>
+  </form>
   </div>
-</form>
-</div>
-
-
-
-{{form.value | json}}
-{{form.valid | json}}
-
-
+  
