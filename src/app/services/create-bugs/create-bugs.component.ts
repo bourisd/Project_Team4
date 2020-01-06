@@ -69,4 +69,27 @@ export class CreateBugsComponent implements OnInit {
   addComment(comment = null) {
     this.commentsArray.push(this.getcomments(comment));
   }
+
+  setReporterValidators() {
+    const statusControl = this.form.get('status');
+    const reporterControl = this.form.get('reporter');
+
+    this.form.get('reporter').valueChanges
+      .subscribe(reporter => {
+
+        if (reporter === 'QA') {
+          statusControl.setValidators([Validators.required]);
+        }
+        else {
+          statusControl.setValidators(null);
+        }
+        statusControl.updateValueAndValidity();
+        reporterControl.updateValueAndValidity();
+      });
+
+
+
+    }
+
+
 }

@@ -49,4 +49,42 @@ describe('CreateBugsComponent', () => {
 
     expect(component.form.valid).toBeTruthy();
   });
+
+  it('form should be invalid with -Set the Reporter to QA-', () => {
+    component.initializeFormState();
+    component.setReporterValidators();
+    const titleField = component.form.get('title');
+    const priorityField = component.form.get('priority');
+    const reporterField = component.form.get('reporter');
+    const descriptionField = component.form.get('description');
+    const statusField = component.form.get('status');
+
+    titleField.setValue('testTitle');
+    priorityField.setValue('1');
+    reporterField.setValue('QA');
+    descriptionField.setValue('descriptionTest');
+    statusField.setValue('');
+
+    expect(component.form.valid).toBeFalsy();
+  });
+
+  it('form should be valid with -Set the Reporter to QA AND STATUS-', () => {
+    component.initializeFormState();
+    component.setReporterValidators();
+    const titleField = component.form.get('title');
+    const priorityField = component.form.get('priority');
+    const reporterField = component.form.get('reporter');
+    const descriptionField = component.form.get('description');
+    const statusField = component.form.get('status');
+
+    titleField.setValue('testTitle');
+    priorityField.setValue('1');
+    reporterField.setValue('QA');
+    descriptionField.setValue('descriptionTest');
+    statusField.setValue('Rejected');
+
+    expect(component.form.valid).toBeTruthy();
+  });
+
+
 });
