@@ -12,6 +12,8 @@ import { Router } from "@angular/router";
 export class GetBugsComponent implements OnInit {
   form: FormGroup;
   listdata: BugList[];
+  column :string;
+  dir: string;
   byTitle = false;
   byPriority = false;
   byReporter = false;
@@ -53,85 +55,90 @@ export class GetBugsComponent implements OnInit {
   }
 
   sortByTitle() {
-    let dir: string;
-
+    //let dir: string;
+    this.pageNumber = 0;
+    this.column = "title";
     if (this.byTitle == true) {
-      dir = "asc";
+      this.dir = "asc";
       this.columnSorting(false, false, false, false, false);
     } else {
-      dir = "desc";
+      this.dir = "desc";
       this.columnSorting(true, false, false, false, false);
     }
 
-    this.getBugs.getBugs("title", dir).subscribe(response => {
+    this.getBugs.getBugs("title", this.dir).subscribe(response => {
       console.log(response);
       this.listdata = response;
     });
   }
 
   sortByPriority() {
-    let dir: string;
-
+    //let dir: string;
+    this.column = "priority";
+    this.pageNumber = 0;
     if (this.byPriority == true) {
-      dir = "asc";
+      this.dir = "asc";
       this.columnSorting(false, false, false, false, false);
     } else {
-      dir = "desc";
+      this.dir = "desc";
       this.columnSorting(false, true, false, false, false);
     }
 
-    this.getBugs.getBugs("priority", dir).subscribe(response => {
+    this.getBugs.getBugs("priority", this.dir).subscribe(response => {
       console.log(response);
       this.listdata = response;
     });
   }
 
   sortByReporter() {
-    let dir: string;
-
+    //let dir: string;
+    this.column = "reporter";
+    this.pageNumber = 0;
     if (this.byReporter == true) {
-      dir = "asc";
+      this.dir = "asc";
       this.columnSorting(false, false, false, false, false);
     } else {
-      dir = "desc";
+      this.dir = "desc";
       this.columnSorting(false, false, true, false, false);
     }
 
-    this.getBugs.getBugs("reporter", dir).subscribe(response => {
+    this.getBugs.getBugs("reporter", this.dir).subscribe(response => {
       console.log(response);
       this.listdata = response;
     });
   }
 
   sortByCreationDate() {
-    let dir: string;
-
+    //let dir: string;
+    this.column = "createdAt";
+    this.pageNumber = 0;
     if (this.byCreationDate == true) {
-      dir = "asc";
+      this.dir = "asc";
       this.columnSorting(false, false, false, false, false);
     } else {
-      dir = "desc";
+      this.dir = "desc";
       this.columnSorting(false, false, false, true, false);
     }
 
-    this.getBugs.getBugs("createdAt", dir).subscribe(response => {
+    this.getBugs.getBugs("createdAt", this.dir).subscribe(response => {
       console.log(response);
       this.listdata = response;
     });
   }
 
   sortByStatus() {
-    let dir: string;
-
+    //let dir: string;
+    this.column = "status";
+    this.pageNumber = 0;
     if (this.byStatus == true) {
-      dir = "asc";
+      this.dir = "asc";
       this.columnSorting(false, false, false, false, false);
     } else {
-      dir = "desc";
+      this.dir = "desc";
       this.columnSorting(false, false, false, false, true);
     }
 
-    this.getBugs.getBugs("status", dir).subscribe(response => {
+    this.getBugs.getBugs("status", this.dir).subscribe(response => {
       console.log(response);
       this.listdata = response;
     });
@@ -163,7 +170,8 @@ export class GetBugsComponent implements OnInit {
   getNextPage() {
       if(this.listdata.length == 14){
         this.pageNumber += 1
-        this.getBugs.getPaging(this.pageNumber).subscribe(response => {
+        //this.getBugs.getPaging(this.pageNumber).subscribe(response => {
+          this.getBugs.getPaging(this.pageNumber,this.column,this.dir).subscribe(response => {
           this.listdata = response;
         });
       }
@@ -172,7 +180,8 @@ export class GetBugsComponent implements OnInit {
   getPreviousPage(){
     if(this.pageNumber > 0){
       this.pageNumber -= 1;
-      this.getBugs.getPaging(this.pageNumber).subscribe(response =>
+      //this.getBugs.getPaging(this.pageNumber).subscribe(response =>
+      this.getBugs.getPaging(this.pageNumber,this.column,this.dir).subscribe(response =>
         {
           this.listdata = response;
         })

@@ -19,10 +19,10 @@ export class GetBugsService {
     return this.http.get(endpointf);
   }
 
-  getBugsAfterDelete(): Observable<any> { 
+  getBugsAfterDelete(): Observable<any> {
     const endpointf =
       this.endpoint + "?sort=title,desc" + "&page=0" + "&size=14";
-    console.log(endpointf);   
+    console.log(endpointf);
     return this.http.get(endpointf);
   }
 
@@ -46,18 +46,24 @@ export class GetBugsService {
     return this.editBugsData;
   }
 
-  getPaging(i: number): Observable<any>{
-    const endpointf =
-      this.endpoint + "?sort=title,desc" + "&page=" + i + "&size=14";
-      return this.http.get(endpointf);
-  }
+  //getPaging(i: number): Observable<any>{
+ //   const endpointf =
+  //    this.endpoint + "?sort=title,desc" + "&page=" + i + "&size=14";
+  //    return this.http.get(endpointf);
+ // }
+
+ getPaging(i: number, column: string, dir: string): Observable<any>{
+  const endpointf =
+  this.endpoint + "?sort=" + column + "," + dir + "&page=" + i + "&size=14";
+    return this.http.get(endpointf);
+}
 
   deleteBug(id: string) {
     return this.http.delete(`${this.endpoint}/${id}`)
   }
 
   searchBug(title: string, priority:string, reporter: string, status: string): Observable<any>{
-    const endpointf = 
+    const endpointf =
     this.endpoint + "?sort=title,desc" + "&page=0"  + "&size=1000" + "&title=" + title + "&priority=" + priority + "&reporter=" + reporter + "&status=" + status;
     return this.http.get(endpointf);
   }
